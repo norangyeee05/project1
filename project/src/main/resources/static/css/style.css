@@ -1,0 +1,32 @@
+/* Logic Project custom styles (Bootstrap 기반 추가 커스텀) */
+
+body {
+    background-color: #f8f9fa;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+main {
+    flex: 1 0 auto;
+    padding-bottom: 2rem;
+}
+
+.navbar-brand {
+    font-weight: 700;
+    letter-spacing: -0.02em;
+}
+
+.card {
+    border: none;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+}
+
+.table th {
+    color: #6c757d;
+    font-weight: 600;
+}
+
+footer {
+    flex-shrink: 0;
+}

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/header :: head(title='회원가입')}"></head>
+<body>
+<div th:replace="~{fragments/header :: nav}"></div>
+
+<main class="container" style="max-width: 480px;">
+    <h2 class="mb-4 text-center">회원가입</h2>
+
+    <div class="alert alert-danger" role="alert" th:if="${error}" th:text="${error}">
+        오류 메시지
+    </div>
+
+    <form th:action="@{/members/signup}" th:object="${member}" method="post" id="signupForm">
+        <div class="mb-3">
+            <label for="loginId" class="form-label">아이디</label>
+            <input type="text" class="form-control" id="loginId" th:field="*{loginId}" required autofocus>
+        </div>
+        <div class="mb-3">
+            <label for="password" class="form-label">비밀번호</label>
+            <input type="password" class="form-control" id="password" th:field="*{password}" required>
+        </div>
+        <div class="mb-3">
+            <label for="passwordConfirm" class="form-label">비밀번호 확인</label>
+            <input type="password" class="form-control" id="passwordConfirm" required>
+            <div class="form-text text-danger d-none" id="passwordConfirmError">비밀번호가 일치하지 않습니다.</div>
+        </div>
+        <div class="mb-3">
+            <label for="name" class="form-label">이름</label>
+            <input type="text" class="form-control" id="name" th:field="*{name}" required>
+        </div>
+        <div class="mb-3">
+            <label for="email" class="form-label">이메일</label>
+            <input type="email" class="form-control" id="email" th:field="*{email}" required>
+        </div>
+        <div class="mb-3">
+            <label for="phone" class="form-label">전화번호</label>
+            <input type="text" class="form-control" id="phone" th:field="*{phone}" placeholder="010-0000-0000">
+        </div>
+
+        <div class="form-check mb-2">
+            <input class="form-check-input" type="checkbox" id="termsAgreed" th:field="*{termsAgreed}" required>
+            <label class="form-check-label" for="termsAgreed">(필수) 이용약관에 동의합니다.</label>
+        </div>
+        <div class="form-check mb-4">
+            <input class="form-check-input" type="checkbox" id="privacyAgreed" th:field="*{privacyAgreed}" required>
+            <label class="form-check-label" for="privacyAgreed">(필수) 개인정보 수집 및 이용에 동의합니다.</label>
+        </div>
+
+        <button type="submit" class="btn btn-primary w-100">가입하기</button>
+    </form>
+</main>
+
+<div th:replace="~{fragments/footer :: footer}"></div>
+<div th:replace="~{fragments/footer :: scripts}"></div>
+
+<script th:inline="javascript">
+    document.getElementById('signupForm').addEventListener('submit', function (e) {
+        const password = document.getElementById('password').value;
+        const passwordConfirm = document.getElementById('passwordConfirm').value;
+        const errorEl = document.getElementById('passwordConfirmError');
+
+        if (password !== passwordConfirm) {
+            e.preventDefault();
+            errorEl.classList.remove('d-none');
+        } else {
+            errorEl.classList.add('d-none');
+        }
+    });
+</script>
+</body>
+</html>

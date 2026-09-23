@@ -1,0 +1,24 @@
+spring:
+  application:
+    name: project
+  datasource:
+    url: jdbc:postgresql://localhost:5432/logic
+    username: postgres
+    password: 1004
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    open-in-view: false
+    properties:
+      hibernate:
+        format_sql: true
+    show-sql: false
+  thymeleaf:
+    cache: false
+server:
+  port: 8081
+logging:
+  level:
+    org.hibernate.SQL: info
+    com.logic.project: debug

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/header :: head(title='홈')}"></head>
+<body>
+<div th:replace="~{fragments/header :: nav}"></div>
+
+<main class="container">
+    <div class="p-5 mb-4 bg-light rounded-3 shadow-sm">
+        <h1 class="display-5 fw-bold" th:text="${message}">메인페이지 입니다.</h1>
+        <p class="col-md-8 fs-5 text-muted">Spring Boot + Thymeleaf 기반 회원 관리 프로젝트입니다.</p>
+        <div class="mt-4" th:if="${session.loginMember == null}">
+            <a class="btn btn-primary btn-lg me-2" th:href="@{/members/login}">로그인</a>
+            <a class="btn btn-outline-secondary btn-lg" th:href="@{/members/terms}">회원가입</a>
+        </div>
+        <div class="mt-4" th:if="${session.loginMember != null}">
+            <a class="btn btn-primary btn-lg" th:href="@{/members/mypage}">마이페이지로 이동</a>
+        </div>
+    </div>
+</main>
+
+<div th:replace="~{fragments/footer :: footer}"></div>
+<div th:replace="~{fragments/footer :: scripts}"></div>
+</body>
+</html>

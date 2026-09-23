@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <th:block th:fragment="head(title)">
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title th:text="${title} ?: 'Logic Project'">Logic Project</title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+        <link rel="stylesheet" th:href="@{/css/style.css}">
+    </th:block>
+</head>
+<body>
+<nav th:fragment="nav" class="navbar navbar-expand-lg navbar-dark bg-dark mb-4">
+    <div class="container">
+        <a class="navbar-brand" th:href="@{/}">Logic Project</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="메뉴 열기">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto align-items-lg-center">
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/}">홈</a>
+                </li>
+
+                <li class="nav-item" th:if="${session.loginMember == null}">
+                    <a class="nav-link" th:href="@{/members/login}">로그인</a>
+                </li>
+                <li class="nav-item" th:if="${session.loginMember == null}">
+                    <a class="nav-link" th:href="@{/members/terms}">회원가입</a>
+                </li>
+
+                <li class="nav-item" th:if="${session.loginMember != null}">
+                    <a class="nav-link" th:href="@{/members/mypage}">마이페이지</a>
+                </li>
+                <li class="nav-item"
+                    th:if="${session.loginMember != null and session.loginMember.role.name() == 'ADMIN'}">
+                    <a class="nav-link" th:href="@{/admin/members}">관리자</a>
+                </li>
+                <li class="nav-item" th:if="${session.loginMember != null}">
+                    <span class="nav-link text-light-emphasis">
+                        <span th:text="${session.loginMember.name}">사용자</span>님
+                    </span>
+                </li>
+                <li class="nav-item" th:if="${session.loginMember != null}">
+                    <a class="nav-link" th:href="@{/members/logout}">로그아웃</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+</body>
+</html>

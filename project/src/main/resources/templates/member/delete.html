@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/header :: head(title='회원 탈퇴')}"></head>
+<body>
+<div th:replace="~{fragments/header :: nav}"></div>
+
+<main class="container" style="max-width: 480px;">
+    <h2 class="mb-4 text-center text-danger">회원 탈퇴</h2>
+
+    <div class="alert alert-warning">
+        회원 탈퇴 시 계정이 비활성화 처리되며, 일부 정보는 복구가 어려울 수 있습니다.<br>
+        정말로 탈퇴하시겠습니까?
+    </div>
+
+    <form th:action="@{/members/delete}" method="post">
+        <div class="d-flex gap-2">
+            <button type="submit" class="btn btn-danger flex-fill">탈퇴하기</button>
+            <a class="btn btn-outline-secondary flex-fill" th:href="@{/members/mypage}">취소</a>
+        </div>
+    </form>
+</main>
+
+<div th:replace="~{fragments/footer :: footer}"></div>
+<div th:replace="~{fragments/footer :: scripts}"></div>
+</body>
+</html>
