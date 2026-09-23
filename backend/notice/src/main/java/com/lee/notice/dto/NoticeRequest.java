@@ -14,7 +14,7 @@ import lombok.Setter;
 @AllArgsConstructor
 public class NoticeRequest {
 
-    //폼검증 (@)
+    //폼검증 (@NotBlank)
     @NotBlank(message = "제목을 입력하시오.")
     @Size(max = 200, message = "제목은 최대 200자까지 입력이 가능합니다.")
     private String title;

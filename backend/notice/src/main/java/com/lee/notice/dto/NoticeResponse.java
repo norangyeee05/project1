@@ -20,7 +20,7 @@ public class NoticeResponse {
 
     //service에서 해도 되는데 지금은 dto에서 하는거임
     //내부에서 Notice를 받아서 -> NoticeResponse로 반환하겠다고 선언
-    //나중에 from만 호출하면 Notice가 알아서 NoticeResponse가 됨
+    //나중에 from만 호출하면 Notice가 알아서 NoticeResponse에서 선언한 private Long id; 등이 됨
     public static NoticeResponse from(Notice notice) {
         return NoticeResponse.builder()
                 .id(notice.getId())

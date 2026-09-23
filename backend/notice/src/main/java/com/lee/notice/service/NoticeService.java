@@ -20,20 +20,18 @@ public class NoticeService {
 
     //목록
     public List<NoticeResponse> findAll() {
-        return noticeRepository.findAll(
-                org.springframework.data.domain.Sort.by(Sort.Direction.DESC, "id") //id의 내림차순
-                )
+        return noticeRepository.findAll(org.springframework.data.domain.Sort.by(Sort.Direction.DESC, "id")) //id의 내림차순
                 .stream().map(NoticeResponse::from).toList();
         //return noticeRepository.findAll() 이렇게만 지정하면 반환타입이 List<Notice>가 돼서 오류가 발생함
         //map으로 바뀐 데이터를 toList를 해줌으로 List 형식으로 변경이 됨, NoticeResponse는 static이어야 작동됨
-        //stream()은 여러건일 때 위와 같이 형식을 변경하게 선언해주는 역할임
+        //stream()은 여러건일 때 위와 같이 형식을 변경하게 해주는 역할임
     }
 
     //상세보기
     @Transactional
     public NoticeResponse findById(Long id) {
         Notice notice = noticeRepository.findById(id).orElseThrow(
-                () -> new IllegalArgumentException(id+"공지사항을 찾을 수 없습니다."));
+                () -> new IllegalArgumentException(id+" 공지사항을 찾을 수 없습니다."));
 
         //읽은 횟수 증가(NoticeRepository를 이용한 실제 DB, 엔티티)
         noticeRepository.increaseHits(id); // 여기서 넣은 id가 Param에 id에 대입이 되어서 작동됨
@@ -51,7 +49,7 @@ public class NoticeService {
                 .author(request.getAuthor())
                 .hits(0L)
                 .build();
-        //request를 바로 넣으면 안되고, NoticeResponse.from를 하지 않으면 반환 타입이 notice가 됨 그럼 리스폰이 아니니까 오류가 생김
+        //request로 넣으면 안되고, NoticeResponse.from를 하지 않으면 반환 타입이 notice가 돼서 반환 타입이 달라 오류가 생김
         return NoticeResponse.from(noticeRepository.save(notice));
     }
 
